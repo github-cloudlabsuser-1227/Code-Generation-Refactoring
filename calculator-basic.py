@@ -16,7 +16,7 @@ def divide(x, y):
     if y != 0:
         return x / y
     else:
-        return "Division by zero error"
+        raise ZeroDivisionError("Division by zero error")
 
 def main():
     print("Select operation:")
@@ -26,20 +26,33 @@ def main():
     print("4. Divide")
     print("5. Exit")
 
-    choice = input("Enter choice (1/2/3/4/5): ")
+    choice = input("Enter choice (1/2/3/4/5): ").strip()
 
     if choice in ['1', '2', '3', '4']:
-        num1 = float(input("Enter first number: "))
-        num2 = float(input("Enter second number: "))
+        while True:
+            try:
+                num1 = float(input("Enter first number: "))
+                break
+            except ValueError:
+                print("Invalid input. Please enter a numeric value.")
+        while True:
+            try:
+                num2 = float(input("Enter second number: "))
+                break
+            except ValueError:
+                print("Invalid input. Please enter a numeric value.")
 
-        if choice == '1':
-            print(f"{num1} + {num2} = {add(num1, num2)}")
-        elif choice == '2':
-            print(f"{num1} - {num2} = {subtract(num1, num2)}")
-        elif choice == '3':
-            print(f"{num1} * {num2} = {multiply(num1, num2)}")
-        elif choice == '4':
-            print(f"{num1} / {num2} = {divide(num1, num2)}")
+        try:
+            if choice == '1':
+                print(f"{num1} + {num2} = {add(num1, num2)}")
+            elif choice == '2':
+                print(f"{num1} - {num2} = {subtract(num1, num2)}")
+            elif choice == '3':
+                print(f"{num1} * {num2} = {multiply(num1, num2)}")
+            elif choice == '4':
+                print(f"{num1} / {num2} = {divide(num1, num2)}")
+        except ZeroDivisionError as e:
+            print(e)
     elif choice == '5':
         print("Exiting the calculator.")
     else:
