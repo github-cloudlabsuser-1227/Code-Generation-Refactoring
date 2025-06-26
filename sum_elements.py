@@ -1,3 +1,4 @@
+# Maximum number of elements allowed
 MAX = 100
 
 def calculate_sum(arr):
@@ -19,12 +20,11 @@ def main():
       n = get_integer(f"Enter the number of elements (1-{MAX}): ", 1, MAX)
       arr = []
       print(f"Enter {n} integers:")
-      for _ in range(n):
+         arr.append(get_integer("> ", 1, MAX))
          arr.append(get_integer("> "))
       total = calculate_sum(arr)
       print("Sum of the numbers:", total)
    except KeyboardInterrupt:
       print("\nProgram terminated by user.")
-
 if __name__ == "__main__":
    main()
